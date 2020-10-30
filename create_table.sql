@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS timezones (
+		name VCHAR(8) PRIMARY KEY,
+		offset INTEGER NOT NULL);
+
+CREATE TABLE IF NOT EXISTS raiders (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		name VCHAR(32) NOT NULL,
+		timezone VCHAR(8) NOT NULL,
+		FOREIGN KEY (timezone) REFERENCES timezones(name));
+
+CREATE TABLE IF NOT EXISTS statics (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		tank1 INTEGER,
+		tank2 INTEGER,
+		heal1 INTEGER,
+		heal2 INTEGER,
+		mdps1 INTEGER,
+		mdps2 INTEGER,
+		rdps1 INTEGER,
+		rdps2 INTEGER,
+		day VCHAR(16) NOT NULL,
+		start VCHAR(8) NOT NULL,
+		finish VCHAR(8) NOT NULL,
+		FOREIGN KEY (tank1) REFERENCES raiders(id),
+		FOREIGN KEY (tank2) REFERENCES raiders(id),
+		FOREIGN KEY (heal1) REFERENCES raiders(id),
+		FOREIGN KEY (heal2) REFERENCES raiders(id),
+		FOREIGN KEY (mdps1) REFERENCES raiders(id),
+		FOREIGN KEY (mdps2) REFERENCES raiders(id),
+		FOREIGN KEY (rdps1) REFERENCES raiders(id),
+		FOREIGN KEY (rdps2) REFERENCES raiders(id));
